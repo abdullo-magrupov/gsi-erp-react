@@ -1,0 +1,2 @@
+export const GET_ALL_CLIENTS = "GET_ALL_CLIENTS";
+export const GET_CLIENT_ORDERS = "GET_CLIENT_ORDERS";

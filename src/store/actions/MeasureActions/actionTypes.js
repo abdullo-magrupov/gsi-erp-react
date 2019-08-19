@@ -1,0 +1,4 @@
+export const GET_ALL_MEASURES = "GET_ALL_MEASURES";
+export const GET_MEASURE = "GET_MEASURE";
+export const CREATE_MEASURE = "CREATE_MEASURE";
+export const DELETE_MEASURE = "DELETE_MEASURE";
