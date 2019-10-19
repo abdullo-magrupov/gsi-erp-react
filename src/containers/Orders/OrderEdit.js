@@ -311,7 +311,7 @@ class OrderEdit extends Component {
 
         {orderItems.length > 0 ? (
           <div
-            style={{ width: "45%", float: "right", margin: "25px 20px 25px 0" }}
+            style={{ width: "40%", float: "right", margin: "25px 20px 25px 0" }}
           >
             {orderSummaryTable}
           </div>
