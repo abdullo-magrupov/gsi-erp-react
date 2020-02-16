@@ -28,6 +28,18 @@ class ClientActions extends Component {
             window.alert(error);
           });
 
+        response.data.forEach((x, ind, arr) => {
+          if (ind === 0) {
+            x.balance = 0;
+          } else {
+            if (arr[ind - 1].actionName === 'client_order') {
+              x.balance = arr[ind - 1].balance + arr[ind - 1].sourceAmount;
+            } else {
+              x.balance = arr[ind - 1].balance - arr[ind - 1].sourceAmount;
+            }
+          }
+        });
+        
         this.setState({ actions: response.data });
       })
       .catch(error => {
@@ -104,6 +116,7 @@ class ClientActions extends Component {
         >
           <td>{x.sourceDate}</td>
           <td>{x.sourceAmount}</td>
+          <td>{x.balance}</td>
           <td>{x.sourceNote}</td>
           <td>
             <button
@@ -125,6 +138,7 @@ class ClientActions extends Component {
           <tr>
             <th scope="col">Дата</th>
             <th scope="col">Сумма</th>
+            <th scope="col">Остатка</th>
             <th scope="col">Заметка</th>
             <th scope="col" />
           </tr>
@@ -132,9 +146,9 @@ class ClientActions extends Component {
         <tbody>
           {clientActions}
           <tr style={{ fontWeight: "bold" }}>
-            <td>Остатка</td>
+            <td colSpan="2">Остатка</td>
             <td>{this.state.balance}</td>
-            <td colSpan="2" />
+            <td colSpan="2"/>
           </tr>
         </tbody>
       </table>
@@ -174,9 +188,11 @@ class ClientActions extends Component {
           >
             Новая оплата
           </button>
+          <a id="up" style={{border: "2px solid green", padding: "5px 10px"}}  href="#low">v</a>
         </div>
         <div style={{ width: "100%", float: "left", margin: "15px 20px" }}>
           {actionsTable}
+          <a id="low" style={{border: "2px solid green", padding: "5px 10px"}} href="#up">^</a>
         </div>
       </div>
     );
