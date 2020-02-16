@@ -1,0 +1,32 @@
+#orderSummaryHeaderPrint {
+  display: none;
+}
+
+#orderPrintButton {
+  width: 100%; 
+  margin: 0 0 15px 0;
+}
+
+@media print {  
+  #orderSummaryHeaderPrint {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  #orderPrintButton {
+    display: none;
+  }
+
+  #orderSummaryContainerPrint {
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 15px;
+      font-size: 14px;
+      line-height: 18px;
+  }
+}

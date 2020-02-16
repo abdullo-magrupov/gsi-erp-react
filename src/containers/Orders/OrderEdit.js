@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "../../axios-init";
+import "./OrderEdit.css";
 
 class OrderEdit extends Component {
   constructor(props) {
@@ -184,6 +185,10 @@ class OrderEdit extends Component {
       });
   };
 
+  onPrintOrder = event => {
+    window.print();
+  };
+
   render() {
     let productRows = this.state.products.map((x, ind) => (
       <tr key={"productKey" + x.productId}>
@@ -237,6 +242,7 @@ class OrderEdit extends Component {
     let orderItemRows = orderItems.map(x => (
       <tr key={"orderItemId" + x.productId}>
         <td>{x.name}</td>
+        <td>{x.soldPrice}</td>
         <td>{x.boxPrice}</td>
         <td>{x.soldQuant}</td>
         <td>{x.soldPrice * x.soldQuant * x.boxQuant}</td>
@@ -244,23 +250,36 @@ class OrderEdit extends Component {
     ));
 
     let orderSummaryTable = (
-      <table className="table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Название</th>
-            <th scope="col">Цена одной упаковке</th>
-            <th scope="col">Количество</th>
-            <th scope="col">Сумма</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orderItemRows}
-          <tr>
-            <th colSpan="3">Обшая сумма</th>
-            <th>{this.state.totalAmount}</th>
-          </tr>
-        </tbody>
-      </table>
+      <div id="orderSummaryContainerPrint">
+        <div id="orderPrintButton" style={{ width: "100%", margin: "0px 0px 15px 0px" }}>
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={this.onPrintOrder}
+          >
+            Печать
+          </button>
+        </div>
+        <h3 id="orderSummaryHeaderPrint">OOO "SHONUR LUX PRODUCTION"</h3>
+        <table className="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Название</th>
+              <th scope="col">Цена одного товара</th>
+              <th scope="col">Цена одной упаковке</th>
+              <th scope="col">Количество</th>
+              <th scope="col">Сумма</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orderItemRows}
+            <tr>
+              <th colSpan="4">Обшая сумма</th>
+              <th>{this.state.totalAmount}</th>
+            </tr>
+          </tbody>
+        </table>      
+      </div>
     );
 
     return (
